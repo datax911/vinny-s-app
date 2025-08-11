@@ -5,53 +5,50 @@
       layout:decorate="~{_layout.html}">
 
 <head>
-    <title>Index</title>
+    <title>Accueil</title>
 </head>
 
 <body>
 
-<div layout:fragment="content" class="container px-4 py-5" id="featured-3"><h2 class="pb-2 border-bottom">Columns with
-    icons</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+<div layout:fragment="content" class="container px-4 py-5" id="featured-3"><h2 class="pb-2 border-bottom">Mon Cash</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
         <div class="feature col">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
                 <i class="bi bi-alarm"></i>
             </div>
-            <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-                probably just keep going until we run out of words.</p> <a th:href="@{/test}" class="icon-link">
-            Call to action
-            <i class="bi bi-alarm"></i>
+            <h3 class="fs-2 text-body-emphasis">FTQ</h3>
+            <p>FTQ Cumulé</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].aiFtqCumul}">FTQ Cumulé</h3>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">DCPP</h3>
+            <p>Régime de pension à cotisations déterminées</p>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].seDcppCumul}"></h3>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Match CÉLI</h3>
+            <p>CÉLI Cumulé</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].erMatchCeliCumul}">Match CÉLI Cumulé</h3>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">REER Cumulé</h3>
+            <p>REER cumulé</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].eeReerCumul}">REER Cumulé</h3>
+        </div>
 
-        </a></div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                <svg class="bi" width="1em" height="1em" aria-hidden="true">
-                    <use xlink:href="#people-circle"></use>
-                </svg>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-                probably just keep going until we run out of words.</p> <a href="#" class="icon-link">
-            Call to action
-            <svg class="bi" aria-hidden="true">
-                <use xlink:href="#chevron-right"></use>
-            </svg>
-        </a></div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                <svg class="bi" width="1em" height="1em" aria-hidden="true">
-                    <use xlink:href="#toggles2"></use>
-                </svg>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-                probably just keep going until we run out of words.</p> <a href="#" class="icon-link">
-            Call to action
-            <svg class="bi" aria-hidden="true">
-                <use xlink:href="#chevron-right"></use>
-            </svg>
-        </a></div>
+
     </div>
 
 
@@ -66,17 +63,25 @@
         <thead>
         <tr>
             <th>Payé le</th>
-            <th>Heures Regulières</th>
-            <th>Salaire Régulier</th>
+            <th>Heures</th>
+            <th>Salaire Brute</th>
+            <th>Déductions Gouv.</th>
+            <th>Déductions Autre</th>
+            <th>Virement Bancaire</th>
 
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="t : ${talons}">
-            <td th:text="${t.dateDePaiement}"></td>
+            <td>
+                <a th:text="${t.dateDePaiement}" th:href="@{/details/{id}(id=${t.id})}"></a>
+            </td>
             <td th:text="${t.salaireRegulierHeures}"></td>
-            <td th:text="${t.salaireRegulierMontant}"></td>
+            <td th:text="${t.salaireBrutCourant}"></td>
+            <td th:text="${t.deductionStatCourant}"></td>
+            <td th:text="${t.autresDedCourant}"></td>
+            <td th:text="${t.virementBancaire}"></td>
         </tr>
         </tbody>
     </table>
