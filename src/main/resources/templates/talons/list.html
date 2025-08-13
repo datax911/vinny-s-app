@@ -6,7 +6,7 @@
       layout:decorate="~{_layout.html}">
 
 <head>
-    <title>Payes</title>
+    <title>Talons de payes</title>
 </head>
 
 <body>
@@ -117,7 +117,7 @@
         <tbody>
         <tr th:each="t : ${talons}">
             <td>
-                <a th:text="${t.dateDePaiement}" th:href="@{/talon/{id}(id=${t.id})}"></a>
+                <a th:text="${t.dateDePaiement}" th:href="@{/talons/{id}(id=${t.id})}"></a>
             </td>
             <td th:text="${t.salaireRegulierHeures}"></td>
             <td th:text="${t.salaireBrutCourant}"></td>

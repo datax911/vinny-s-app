@@ -34,12 +34,16 @@ public class TalonDePayeService {
         return talonDePayeEntities.stream().map(talonDePayeMapper::toDto).collect(Collectors.toList());
     }
 
+
+
     public TalonDePayeDto save(TalonDePayeDto talonDePayeDto) {
 
         TalonDePaye talonDePaye = talonDePayeMapper.toEntity(talonDePayeDto);
         talonDePayeRepository.save(talonDePaye);
         return talonDePayeMapper.toDto(talonDePaye);
     }
+
+
 
     public TalonDePayeDto findById(Long id) {
         TalonDePaye talonDePaye = talonDePayeRepository.findById(id).orElseThrow();

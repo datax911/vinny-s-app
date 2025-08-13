@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout.html}">
+
+<head>
+    <title>Index</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <h1>Liste des Exemples</h1>
+
+    <ul>
+        <li th:each="e : ${exemples}" th:text="${e.id + ' ----- ' + e.commentaire + ' ----- ' + e.myNumber}"></li>
+    </ul>
+
+</div>
+
+
+
+</body>
+</html>

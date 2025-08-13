@@ -24,7 +24,7 @@
             <span class="badge text-bg-secondary" th:text="${talon.id}">ID</span>
         </div>
 
-        <form th:action="@{/talon/save}" th:object="${talon}" method="post">
+        <form th:action="@{/talons/{id}(id=${talon.id})}" th:object="${talon}" method="post">
             <input type="hidden" th:field="*{id}"/>
 
             <div class="row row-cols-1 row-cols-lg-2 g-3">

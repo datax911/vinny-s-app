@@ -12,10 +12,8 @@ import java.util.List;
 public class HomeController {
 
 
-    private final TalonDePayeService talonDePayeService;
-
     public HomeController(TalonDePayeService talonDePayeService) {
-        this.talonDePayeService = talonDePayeService;
+
     }
 
     @GetMapping("/")
@@ -23,26 +21,4 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/talon/{id}")
-    public String talon(@PathVariable Long id, Model theModel) {
-        TalonDePayeDto talonDePayeDto = talonDePayeService.findById(id);
-        theModel.addAttribute("talon", talonDePayeDto);
-
-        return "talon";
-    }
-
-    @PostMapping("/talon/save")
-    public String saveTalon(@ModelAttribute TalonDePayeDto talonDePayeDto) {
-
-        TalonDePayeDto newTalonDePayeDto = talonDePayeService.save(talonDePayeDto);
-        return "redirect:/talon/" + talonDePayeDto.getId();
-    }
-
-
-    @GetMapping("/talons")
-    public String talons(Model theModel) {
-        List<TalonDePayeDto> talons = talonDePayeService.findAll();
-        theModel.addAttribute("talons", talons);
-        return "talons";
-    }
 }

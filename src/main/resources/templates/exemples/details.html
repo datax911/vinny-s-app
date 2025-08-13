@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout.html}">
+
+<head>
+    <title>Index</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <h1>Exemple Details</h1>
+
+
+    <form th:action="@{/exemples/create}" th:object="${exemple}" method="POST">
+        <input type="text" th:field="*{commentaire}" />
+        <input type="number" th:field="*{myNumber}" />
+        <button type="submit">Ok</button>
+    </form>
+
+</div>
+
+
+
+</body>
+</html>
