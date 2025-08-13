@@ -1,6 +1,7 @@
 package ca.vrg_online.app.dto;
 
 import lombok.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,10 +13,23 @@ import java.util.Date;
 public class TalonDePayeDto implements Serializable {
     Long id;
     String nomDuFichier;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     Date dateDePaiement;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     Date periodeDateDebut;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     Date periodeDatefin;
+
     Double salaireRegulierHeures;
+    Double vacancesHrs;
+    Double vacancesMontant;
+    Double surtemps15Hrs;
+    Double surtemps15Courant;
+    Double surtemps20Hrs;
+    Double surtemps20Courant;
+    Double congeFlottantMontant;
+    Double congeFerie;
     Double salaireRegulierMontant;
     Double salaireRegulierCumul;
     Double vacancesHrsCumul;

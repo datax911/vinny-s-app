@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout.html}">
+
+<head>
+    <title>Payes</title>
+</head>
+
+<body>
+<div layout:fragment="content" class="container px-4 py-5" id="featured-3"><h2 class="pb-2 border-bottom">Mon Cash</h2>
+
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Temps et demi</h3>
+            <p>Surtemps 1.5x</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].surtemps15Cumul + '$'}"></h3>
+            <h5 th:text="${talons[0].surtemps15HrsCumul + 'hrs'}"></h5>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Temps double</h3>
+            <p>Surtemps 2.0x</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].surtemps20Cumul + '$'}"></h3>
+            <h5 th:text="${talons[0].surtemps20HrsCumul + 'hrs'}"></h5>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Congés</h3>
+            <p>Congés flottants et fériés</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis"
+                th:text="${talons[0].congeFlottantCumul + talons[0].congeFerieCumul + '$'}"></h3>
+            <h5 th:text="${talons[0].congeFlottantHrsCumul + talons[0].congeFerieHrsCumul + 'hrs'}"></h5>
+        </div>
+
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Vacances</h3>
+            <p>Vacances Prises</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].vacancesCumul}">FTQ Cumulé</h3>
+            <h5 th:text="${talons[0].vacancesHrsCumul + 'hrs'}">FTQ Hrs Cumulé</h5>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">FTQ</h3>
+            <p>FTQ Cumulé</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].aiFtqCumul}">FTQ Cumulé</h3>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">DCPP</h3>
+            <p>Régime de pension à cotisations déterminées</p>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].seDcppCumul}"></h3>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">Match CÉLI</h3>
+            <p>CÉLI Cumulé</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].erMatchCeliCumul}">Match CÉLI Cumulé</h3>
+        </div>
+        <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+                <i class="bi bi-alarm"></i>
+            </div>
+            <h3 class="fs-2 text-body-emphasis">REER Cumulé</h3>
+            <p>REER cumulé</p>
+            <br>
+            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].eeReerCumul}">REER Cumulé</h3>
+        </div>
+    </div>
+
+
+    <hr>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Payé le</th>
+            <th>Heures</th>
+            <th>Salaire Brute</th>
+            <th>Déductions Gouv.</th>
+            <th>Déductions Autre</th>
+            <th>Virement Bancaire</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="t : ${talons}">
+            <td>
+                <a th:text="${t.dateDePaiement}" th:href="@{/talon/{id}(id=${t.id})}"></a>
+            </td>
+            <td th:text="${t.salaireRegulierHeures}"></td>
+            <td th:text="${t.salaireBrutCourant}"></td>
+            <td th:text="${t.deductionStatCourant}"></td>
+            <td th:text="${t.autresDedCourant}"></td>
+            <td th:text="${t.virementBancaire}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

@@ -4,9 +4,7 @@ import ca.vrg_online.app.dto.TalonDePayeDto;
 import ca.vrg_online.app.services.TalonDePayeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,19 +19,30 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(Model theModel) {
-
-        List<TalonDePayeDto> talons = talonDePayeService.findAll();
-        theModel.addAttribute("talons", talons);
-
+    public String index() {
         return "index";
     }
 
-    @GetMapping("/details/{id}")
-    public String details(@PathVariable Long id, Model theModel) {
+    @GetMapping("/talon/{id}")
+    public String talon(@PathVariable Long id, Model theModel) {
         TalonDePayeDto talonDePayeDto = talonDePayeService.findById(id);
-        theModel.addAttribute("talonDePaye", talonDePayeDto);
+        theModel.addAttribute("talon", talonDePayeDto);
 
-        return "details";
+        return "talon";
+    }
+
+    @PostMapping("/talon/save")
+    public String saveTalon(@ModelAttribute TalonDePayeDto talonDePayeDto) {
+
+        TalonDePayeDto newTalonDePayeDto = talonDePayeService.save(talonDePayeDto);
+        return "redirect:/talon/" + talonDePayeDto.getId();
+    }
+
+
+    @GetMapping("/talons")
+    public String talons(Model theModel) {
+        List<TalonDePayeDto> talons = talonDePayeService.findAll();
+        theModel.addAttribute("talons", talons);
+        return "talons";
     }
 }

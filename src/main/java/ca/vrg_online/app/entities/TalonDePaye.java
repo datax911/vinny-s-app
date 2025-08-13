@@ -51,6 +51,13 @@ public class TalonDePaye {
 
 
     // --- Vacances
+
+    @Column(name = "vacances_hrs", nullable = false)
+    private Double vacancesHrs = 0.0;
+
+    @Column(name = "vacances_montant", nullable = false)
+    private Double vacancesMontant = 0.0;
+
     @Column(name = "vacances_hrs_cumul", nullable = false)
     private Double vacancesHrsCumul;
 
@@ -59,6 +66,15 @@ public class TalonDePaye {
 
 
     // --- Surtemps 1.5
+
+
+    @Column(name = "surtemps15_hrs", nullable = false)
+    private Double surtemps15Hrs = 0.0;
+
+    @Column(name = "surtemps15_montant", nullable = false)
+    private Double surtemps15Courant = 0.0;
+
+
     @Column(name = "surtemps15_hrs_cumul", nullable = false)
     private Double surtemps15HrsCumul;
 
@@ -67,13 +83,28 @@ public class TalonDePaye {
 
 
     // --- Surtemps 2.0
+
+    @Column(name = "surtemps20_hrs", nullable = false)
+    private Double surtemps20Hrs = 0.0;
+
+    @Column(name = "surtemps20_montant", nullable = false)
+    private Double surtemps20Courant = 0.0;
+
+
     @Column(name = "surtemps20_hrs_cumul", nullable = false)
     private Double surtemps20HrsCumul;
 
     @Column(name = "surtemps20_cumul", nullable = false)
     private Double surtemps20Cumul;
 
+
+
     // --- Congés flottants
+
+
+    @Column(name = "conge_flottant_montant", nullable = false)
+    private Double congeFlottantMontant = 0.0;
+
     @Column(name = "conge_flottant_hrs_cumul", nullable = false)
     private Double congeFlottantHrsCumul;
 
@@ -81,6 +112,10 @@ public class TalonDePaye {
     private Double congeFlottantCumul;
 
     // --- Congés fériés
+
+    @Column(name = "conge_ferie_montant", nullable = false)
+    private Double congeFerie = 0.0;
+
     @Column(name = "conge_ferie_hrs_cumul", nullable = false)
     private Double congeFerieHrsCumul;
 
@@ -118,7 +153,7 @@ public class TalonDePaye {
     @Column(name = "impot_fed_courant", nullable = false)
     private Double impotFedCourant;
 
-    @Column(name = "import_fed_cumul", nullable = false)
+    @Column(name = "impot_fed_cumul", nullable = false)
     private Double impoFedCumul;
 
 

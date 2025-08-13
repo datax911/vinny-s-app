@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout.html}">
+
+<head>
+    <title>Détails — Talon de paie</title>
+    <style>
+        dt{min-width:16rem}
+        .dl-grid{display:grid;grid-template-columns:1fr 2fr;gap:.25rem .75rem}
+        .dl-grid dt{grid-column:1}
+        .dl-grid dd{grid-column:2;margin-bottom:.25rem}
+        .card{height:100%}
+    </style>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="h3 mb-0">Détails — Talon de paie</h1>
+            <span class="badge text-bg-secondary" th:text="${talon.id}">ID</span>
+        </div>
+
+        <form th:action="@{/talon/save}" th:object="${talon}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <div class="row row-cols-1 row-cols-lg-2 g-3">
+
+                <!-- Identité & période -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Identité et période</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Nom du fichier</dt>
+                                <dd><input class="form-control" type="text" th:field="*{nomDuFichier}"/></dd>
+                                <dt>Date de paiement</dt>
+                                <dd><input class="form-control" type="date" th:field="*{dateDePaiement}"/></dd>
+                                <dt>Période — début</dt>
+                                <dd><input class="form-control" type="date" th:field="*{periodeDateDebut}"/></dd>
+                                <dt>Période — fin</dt>
+                                <dd><input class="form-control" type="date" th:field="*{periodeDatefin}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salaire régulier -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Salaire régulier</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Heures régulières</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{salaireRegulierHeures}"/></dd>
+                                <dt>Montant courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{salaireRegulierMontant}"/></dd>
+                                <dt>Montant cumulatif</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{salaireRegulierCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vacances -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Vacances</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Vacances (heures) — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{vacancesHrs}"/></dd>
+                                <dt>Vacances (montant) — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{vacancesMontant}"/></dd>
+                                <dt>Vacances (heures) — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{vacancesHrsCumul}"/></dd>
+                                <dt>Vacances — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{vacancesCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surtemps 1.5 -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Surtemps 1.5×</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Heures — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps15Hrs}"/></dd>
+                                <dt>Montant — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps15Courant}"/></dd>
+                                <dt>Heures — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps15HrsCumul}"/></dd>
+                                <dt>Montant — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps15Cumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Surtemps 2.0 -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Surtemps 2.0×</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Heures — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps20Hrs}"/></dd>
+                                <dt>Montant — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps20Courant}"/></dd>
+                                <dt>Heures — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps20HrsCumul}"/></dd>
+                                <dt>Montant — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{surtemps20Cumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Congés -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Congés</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Congé flottant — montant (courant)</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{congeFlottantMontant}"/></dd>
+                                <dt>Congé férié — montant (courant)</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{congeFerie}"/></dd>
+                                <dt>Congé flottant — heures (cumul)</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{congeFlottantHrsCumul}"/></dd>
+                                <dt>Congé flottant — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{congeFlottantCumul}"/></dd>
+                                <dt>Congé férié — heures (cumul)</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{congeFerieHrsCumul}"/></dd>
+                                <dt>Congé férié — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{congeFerieCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bonis et actions -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Bonis et actions</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Boni — heures (cumul)</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{boniHrsCumul}"/></dd>
+                                <dt>Boni — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{boniCumul}"/></dd>
+                                <dt>Actions — heures (cumul)</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{actionHrsCumul}"/></dd>
+                                <dt>Actions — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{actionCumul}"/></dd>
+                                <dt>Invest. direct actions — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{investDirectActionCumul}"/></dd>
+                                <dt>Action correspondante (net) — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{actionCorrespnetCumul}"/></dd>
+                                <dt>Partage/Match/True-up — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{partagerMtchTrueupCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REER / retraite / épargne -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">REER, retraite et épargne</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>REER sur bonus — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{reerSurBonusCumul}"/></dd>
+                                <dt>REER/All. retraite — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{reerAllRetraiteCumul}"/></dd>
+                                <dt>EE REER — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{eeReerCourant}"/></dd>
+                                <dt>EE REER — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{eeReerCumul}"/></dd>
+                                <dt>AI SE Flex REER — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeFlexReerCumul}"/></dd>
+                                <dt>ER match CELI — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{erMatchCeliCourant}"/></dd>
+                                <dt>ER match CELI — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{erMatchCeliCumul}"/></dd>
+                                <dt>SE DCPP — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{seDcppCourant}"/></dd>
+                                <dt>SE DCPP — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{seDcppCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clubs et autres retenues -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Clubs et autres retenues</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Club social — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{clubSocialCourant}"/></dd>
+                                <dt>Club social — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{clubSocialCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assurances (EE) -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Assurances (employé — EE)</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>EE DMA base — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{eeDmaBaseCourant}"/></dd>
+                                <dt>EE DMA base — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{eeDmaBaseCumul}"/></dd>
+                                <dt>EE Vie base — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{eeVieBaseCourant}"/></dd>
+                                <dt>EE Vie base — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{eeVieBaseCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assurances (SE/AI) -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Assurances (SE/AI)</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>AI SE DMA base — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeDmaBaseCourant}"/></dd>
+                                <dt>AI SE DMA base — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeDmaBaseCumul}"/></dd>
+                                <dt>AI SE Vie base — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeVieBaseCourant}"/></dd>
+                                <dt>AI SE Vie base — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeVieBaseCumul}"/></dd>
+                                <dt>AI SE Médicament — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeMedicamentCourant}"/></dd>
+                                <dt>AI SE Médicament — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeMedicamentCumul}"/></dd>
+                                <dt>AI SE Dentaire — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeDentaireCourant}"/></dd>
+                                <dt>AI SE Dentaire — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeDentaireCumul}"/></dd>
+                                <dt>AI SE Médical — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeMedicalCourant}"/></dd>
+                                <dt>AI SE Médical — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiSeMedicalCumul}"/></dd>
+                                <dt>AI FTQ — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiFtqCourant}"/></dd>
+                                <dt>AI FTQ — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{aiFtqCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impôts et régimes publics (courant) -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Impôts et régimes publics — courant</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Impôt fédéral — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{impotFedCourant}"/></dd>
+                                <dt>Impôt provincial — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{impotProvCourant}"/></dd>
+                                <dt>RRQ — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{rrqCourant}"/></dd>
+                                <dt>Assurance-emploi — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{assuranceEmploiCourant}"/></dd>
+                                <dt>RQAP — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{rqapCourant}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impôts et régimes publics (cumul) -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Impôts et régimes publics — cumul</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Impôt fédéral — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{impoFedCumul}"/></dd>
+                                <dt>Impôt provincial — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{impotProvCumul}"/></dd>
+                                <dt>RRQ — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{rrqCumul}"/></dd>
+                                <dt>Assurance-emploi — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{assuranceEmploiCumul}"/></dd>
+                                <dt>RQAP — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{rqapCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Déductions diverses -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Déductions diverses</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Déductions statutaires — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{deductionStatCourant}"/></dd>
+                                <dt>Déductions statutaires — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{deductionStatCumul}"/></dd>
+                                <dt>Autres déductions — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{autresDedCourant}"/></dd>
+                                <dt>Autres déductions — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{autresDedCumul}"/></dd>
+                                <dt>Réclamations — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{reclamationCourant}"/></dd>
+                                <dt>Réclamations — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{reclamationCumul}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brut / Net / Paiements -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">Brut, net et paiements</div>
+                        <div class="card-body">
+                            <dl class="dl-grid">
+                                <dt>Salaire brut — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{salaireBrutCourant}"/></dd>
+                                <dt>Salaire brut — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{salaireBrutCumul}"/></dd>
+                                <dt>Paiements nets — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{paimentsNetsCourant}"/></dd>
+                                <dt>Paiements nets — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{paimentsNetsCumul}"/></dd>
+                                <dt>Paie nette — courant</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{paieNetCourant}"/></dd>
+                                <dt>Paie nette — cumul</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{paieNetCumul}"/></dd>
+                                <dt>Virement bancaire</dt>
+                                <dd><input class="form-control" type="number" step="0.01" th:field="*{virementBancaire}"/></dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <a th:href="@{/payes}" class="btn btn-outline-secondary">Annuler</a>
+            </div>
+        </form>
+
+        <!-- Note: si votre DTO est annoté @Value (immutable), le binding d’édition nécessitera un objet mutable (@Data) ou un mapper. -->
+    </div>
+</div>
+</body>
+</html>

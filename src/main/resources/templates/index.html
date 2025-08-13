@@ -10,85 +10,60 @@
 
 <body>
 
-<div layout:fragment="content" class="container px-4 py-5" id="featured-3"><h2 class="pb-2 border-bottom">Mon Cash</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                <i class="bi bi-alarm"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">FTQ</h3>
-            <p>FTQ Cumulé</p>
-            <br>
-            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].aiFtqCumul}">FTQ Cumulé</h3>
+<div layout:fragment="content">
+
+    <!-- Section Hero -->
+    <section class="bg-light py-5 text-center mt-4">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Bienvenue</h1>
+            <p class="lead mb-4">Découvrez notre service simple, rapide et efficace.</p>
+            <a href="#features" class="btn btn-primary btn-lg">En savoir plus</a>
         </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                <i class="bi bi-alarm"></i>
+    </section>
+
+    <!-- Section Fonctionnalités -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Rapide</h5>
+                            <p class="card-text">Un service optimisé pour une expérience fluide.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Fiable</h5>
+                            <p class="card-text">Des performances constantes et sécurisées.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Flexible</h5>
+                            <p class="card-text">Adapté à vos besoins et évolutif.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h3 class="fs-2 text-body-emphasis">DCPP</h3>
-            <p>Régime de pension à cotisations déterminées</p>
-            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].seDcppCumul}"></h3>
         </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                <i class="bi bi-alarm"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Match CÉLI</h3>
-            <p>CÉLI Cumulé</p>
-            <br>
-            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].erMatchCeliCumul}">Match CÉLI Cumulé</h3>
+    </section>
+
+    <!-- Section Appel à action -->
+    <section class="bg-primary text-white py-5 text-center">
+        <div class="container">
+            <h2 class="fw-bold">Prêt à commencer ?</h2>
+            <p class="mb-4">Inscrivez-vous dès aujourd'hui et profitez de tous les avantages.</p>
+            <a href="#" class="btn btn-light btn-lg">S'inscrire</a>
         </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-                <i class="bi bi-alarm"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">REER Cumulé</h3>
-            <p>REER cumulé</p>
-            <br>
-            <h3 class="fs-2 text-body-emphasis" th:text="${talons[0].eeReerCumul}">REER Cumulé</h3>
-        </div>
+    </section>
 
-
-    </div>
-
-
-
-  
-
-
-
-
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Payé le</th>
-            <th>Heures</th>
-            <th>Salaire Brute</th>
-            <th>Déductions Gouv.</th>
-            <th>Déductions Autre</th>
-            <th>Virement Bancaire</th>
-
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="t : ${talons}">
-            <td>
-                <a th:text="${t.dateDePaiement}" th:href="@{/details/{id}(id=${t.id})}"></a>
-            </td>
-            <td th:text="${t.salaireRegulierHeures}"></td>
-            <td th:text="${t.salaireBrutCourant}"></td>
-            <td th:text="${t.deductionStatCourant}"></td>
-            <td th:text="${t.autresDedCourant}"></td>
-            <td th:text="${t.virementBancaire}"></td>
-        </tr>
-        </tbody>
-    </table>
 
 </div>
-
-
 </body>
 
 
