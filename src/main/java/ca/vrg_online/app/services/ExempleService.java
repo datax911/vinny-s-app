@@ -3,12 +3,16 @@ package ca.vrg_online.app.services;
 import ca.vrg_online.app.dtos.ExempleDto;
 import ca.vrg_online.app.entities.Exemple;
 import ca.vrg_online.app.entities.ExempleRepository;
+import ca.vrg_online.app.exceptions.ExempleNotFoundException;
 import ca.vrg_online.app.mappers.ExempleMapper;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ExempleService {
 
@@ -25,7 +29,8 @@ public class ExempleService {
 
     // ----------------- READ ------------------ //
     public ExempleDto findById(long id) {
-        return exempleMapper.toDto(exempleRepository.findById(id).orElse(null));
+        //log.info("----------------------> Reading: Exemple id {}", id);
+        return exempleMapper.toDto(exempleRepository.findById(id).orElseThrow(() -> new ExempleNotFoundException(id)));
     }
 
     public List<ExempleDto> findAll() {

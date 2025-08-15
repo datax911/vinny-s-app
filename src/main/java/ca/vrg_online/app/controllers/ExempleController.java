@@ -16,6 +16,7 @@ public class ExempleController {
 
     private final ExempleService exempleService;
 
+
     public ExempleController(ExempleService exempleService) {
         this.exempleService = exempleService;
     }
@@ -29,13 +30,11 @@ public class ExempleController {
     }
 
 
-
     @GetMapping("/{id}")
     public String details(@PathVariable Long id, Model model) {
         model.addAttribute("exemple", exempleService.findById(id));
         return "exemples/details";
     }
-
 
 
     @GetMapping("/{id}/update")
@@ -45,13 +44,11 @@ public class ExempleController {
     }
 
 
-
     @GetMapping("/create")
     public String create(Model theModel) {
         theModel.addAttribute("exemple", new ExempleDto());
         return "/exemples/form";
     }
-
 
 
     @PostMapping("/save")
@@ -61,9 +58,8 @@ public class ExempleController {
             return "/exemples/form";
         }
         ExempleDto newExempleDto = exempleService.save(exempleDto);
-        return  "redirect:/exemples/" + newExempleDto.getId();
+        return "redirect:/exemples/" + newExempleDto.getId();
     }
-
 
 
     @GetMapping("/{id}/delete")
@@ -72,5 +68,18 @@ public class ExempleController {
         return "redirect:/exemples";
     }
 
+    /*
+    TODO:
+        - Mettre l'authentification et l'autorisation
+        - Lire la documentation officielle
+        - Essayer avec un framework de frontend
+     */
+
+
+//    @ExceptionHandler(ExempleNotFoundException.class)
+//    @ResponseBody
+//    public String handleNotFoundException(ExempleNotFoundException ex) {
+//        return "meh";
+//    }
 
 }

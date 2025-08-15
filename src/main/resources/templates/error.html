@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout.html}">
+
+<head>
+    <title>Index</title>
+</head>
+
+<body>
+
+<div layout:fragment="content" style="color: red;">
+    <h1>Une erreur est survenue</h1>
+    <hr>
+
+    <p th:text="${status}"></p>
+    <p th:text="${error}"></p>
+    <p th:text="${message}"></p>
+    <p th:text="${path}"></p>
+</div>
+
+
+
+</body>
+</html>
