@@ -13,16 +13,32 @@
 
 <div layout:fragment="content">
 
-    <h1>Liste des Exemples</h1>
+    <div class="d-flex gap-5 align-items-center">
+        <h1>Liste des Exemples</h1>
+        <a th:href="@{/exemples/create}">Ajouter</a>
+    </div>
 
-    <ul>
-        <li th:each="e : ${exemples}">
-            <a th:href="@{/exemples/{id}(id=${e.id})}" th:text="${e.commentaire + ', ' + e.id}"></a>
-        </li>
-    </ul>
+    <table class="table table-hover mt-4">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Commentaires</th>
+            <th scope="col">Number</th>
 
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="e : ${exemples}">
+            <th scope="row">
+                <a th:href="@{/exemples/{id}(id=${e.id})}" th:text="${e.id}"></a>
+            </th>
+            <td th:text="${e.commentaire}"></td>
+            <td th:text="${e.myNumber}"></td>
+        </tr>
+
+        </tbody>
+    </table>
 </div>
-
 
 
 </body>
