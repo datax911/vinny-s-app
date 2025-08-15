@@ -1,4 +1,4 @@
-package ca.vrg_online.app.dto;
+package ca.vrg_online.app.dtos;
 
 import lombok.Value;
 import org.springframework.format.annotation.DateTimeFormat;

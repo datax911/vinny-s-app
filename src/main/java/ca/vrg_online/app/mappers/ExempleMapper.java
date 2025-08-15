@@ -1,6 +1,6 @@
 package ca.vrg_online.app.mappers;
 
-import ca.vrg_online.app.dto.ExempleDto;
+import ca.vrg_online.app.dtos.ExempleDto;
 import ca.vrg_online.app.entities.Exemple;
 import org.mapstruct.*;
 

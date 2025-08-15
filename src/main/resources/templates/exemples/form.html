@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{_layout.html}">
+
+<head>
+    <title>Exemple form</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+
+    <div class="row mt-2">
+        <div class="col-lg-8 offset-lg-2">
+            <h1>Exemple Form</h1>
+
+            <form class="border border-1 p-4" th:action="@{/exemples/save}" th:object="${exemple}" method="POST">
+
+                <div style="color: red;" th:if="${#fields.hasAnyErrors()}">
+                    <h5>Le formulaire contient des erreurs.</h5>
+                    <ul >
+                        <li th:each="err : ${#fields.detailedErrors()}" th:text="${err.fieldName + ' : ' + err.message}"></li>
+                    </ul>
+                </div>
+
+                <div class="mb-3">
+                    <label for="commentaire" class="form-label">Commentaires</label>
+                    <input th:classappend="${#fields.hasErrors('commentaire')} ? 'is-invalid' : ''" type="text" class="form-control" id="commentaire" th:field="*{commentaire}" autofocus autocomplete="false">
+                </div>
+
+                <div class="mb-3">
+                    <label for="my-number" class="form-label" >My number</label>
+                    <input th:classappend="${#fields.hasErrors('commentaire')} ? 'is-invalid' : ''" type="number" class="form-control" id="my-number" th:field="*{myNumber}">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+</body>
+</html>

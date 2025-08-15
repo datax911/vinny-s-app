@@ -1,6 +1,6 @@
 package ca.vrg_online.app.mappers;
 
-import ca.vrg_online.app.dto.TalonDePayeDto;
+import ca.vrg_online.app.dtos.TalonDePayeDto;
 import ca.vrg_online.app.entities.TalonDePaye;
 import org.mapstruct.*;
 

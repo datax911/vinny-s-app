@@ -16,7 +16,9 @@
     <h1>Liste des Exemples</h1>
 
     <ul>
-        <li th:each="e : ${exemples}" th:text="${e.id + ' ----- ' + e.commentaire + ' ----- ' + e.myNumber}"></li>
+        <li th:each="e : ${exemples}">
+            <a th:href="@{/exemples/{id}(id=${e.id})}" th:text="${e.commentaire + ', ' + e.id}"></a>
+        </li>
     </ul>
 
 </div>

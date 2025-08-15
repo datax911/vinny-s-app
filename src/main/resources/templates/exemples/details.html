@@ -12,16 +12,20 @@
 <body>
 
 <div layout:fragment="content">
-
-    <h1>Exemple Details</h1>
-
-
-    <form th:action="@{/exemples/create}" th:object="${exemple}" method="POST">
-        <input type="text" th:field="*{commentaire}" />
-        <input type="number" th:field="*{myNumber}" />
-        <button type="submit">Ok</button>
-    </form>
-
+    <div class="card mt-4">
+        <div class="card-header d-flex justify-content-between">
+            <div th:text="${'Détails du ' + exemple.id}"></div>
+            <div>
+                <a class="btn btn-success" th:href="@{/exemples/{id}/update(id=${exemple.id})}">Modifier</a>
+                <a class="btn btn-danger" th:href="@{/exemples/{id}/delete(id=${exemple.id})}">Supprimer</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 th:text="${exemple.commentaire}" class="card-title">Special title treatment</h5>
+            <p th:text="${exemple.myNumber}" class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a th:href="@{/exemples}" class="btn btn-primary">Back</a>
+        </div>
+    </div>
 </div>
 
 

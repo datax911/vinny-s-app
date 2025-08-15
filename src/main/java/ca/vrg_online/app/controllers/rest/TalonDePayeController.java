@@ -1,7 +1,6 @@
 package ca.vrg_online.app.controllers.rest;
 
-import ca.vrg_online.app.dto.TalonDePayeDto;
-import ca.vrg_online.app.entities.TalonDePaye;
+import ca.vrg_online.app.dtos.TalonDePayeDto;
 import ca.vrg_online.app.services.TalonDePayeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

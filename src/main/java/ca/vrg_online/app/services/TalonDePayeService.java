@@ -1,7 +1,7 @@
 package ca.vrg_online.app.services;
 
 import ca.vrg_online.app.repositories.TalonDePayeRepository;
-import ca.vrg_online.app.dto.TalonDePayeDto;
+import ca.vrg_online.app.dtos.TalonDePayeDto;
 import ca.vrg_online.app.entities.TalonDePaye;
 import ca.vrg_online.app.mappers.TalonDePayeMapper;
 
